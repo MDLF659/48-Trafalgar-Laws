@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>48 Laws of Power — Study Curriculum</title>
+<style>
+  :root {
+    --bg: #0e0e0f;
+    --surface: #17171a;
+    --surface2: #1f1f24;
+    --border: rgba(255,255,255,0.08);
+    --border2: rgba(255,255,255,0.14);
+    --text: #f0ede8;
+    --text2: #9a9590;
+    --text3: #6b6760;
+    --accent: #c9a96e;
+    --accent-dim: rgba(201,169,110,0.12);
+    --accent-dim2: rgba(201,169,110,0.06);
+    --green: #4ade80;
+    --radius: 10px;
+    --radius-sm: 6px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: Georgia, serif; min-height: 100vh; line-height: 1.6; }
+  .site-header { border-bottom: 0.5px solid var(--border); padding: 2.5rem 2rem 2rem; max-width: 1100px; margin: 0 auto; }
+  .eyebrow { font-family: 'Courier New', monospace; font-size: 11px; letter-spacing: 0.18em; color: var(--accent); text-transform: uppercase; margin-bottom: 0.75rem; }
+  .site-header h1 { font-size: clamp(28px, 5vw, 48px); font-weight: 400; letter-spacing: -0.02em; line-height: 1.1; color: var(--text); }
+  .site-header h1 em { font-style: italic; color: var(--accent); }
+  .site-header p { margin-top: 0.75rem; font-size: 15px; color: var(--text2); font-family: -apple-system, sans-serif; max-width: 560px; }
+  .progress-section { max-width: 1100px; margin: 0 auto; padding: 1.5rem 2rem 0; }
+  .progress-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+  .progress-count { font-family: 'Courier New', monospace; font-size: 12px; color: var(--accent); letter-spacing: 0.08em; }
+  .progress-pct { font-family: 'Courier New', monospace; font-size: 12px; color: var(--text3); }
+  .progress-track { height: 2px; background: var(--border); border-radius: 2px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); border-radius: 2px; transition: width 0.5s ease; }
+  .controls { max-width: 1100px; margin: 0 auto; padding: 1.5rem 2rem; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .filter-label { font-family: 'Courier New', monospace; font-size: 10px; letter-spacing: 0.14em; color: var(--text3); text-transform: uppercase; margin-right: 4px; }
+  .filter-btn { font-family: -apple-system, sans-serif; font-size: 12px; padding: 5px 14px; border-radius: 100px; border: 0.5px solid var(--border2); background: transparent; color: var(--text2); cursor: pointer; transition: all 0.15s; }
+  .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .filter-btn.active { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); }
+  .reset-btn { margin-left: auto; font-family: 'Courier New', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 12px; border-radius: 100px; border: 0.5px solid var(--border); background: transparent; color: var(--text3); cursor: pointer; transition: all 0.15s; }
+  .reset-btn:hover { border-color: #e24b4a; color: #e24b4a; }
+  .grid { max-width: 1100px; margin: 0 auto; padding: 0 2rem 4rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 12px; }
+  .card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 1.25rem; cursor: pointer; transition: border-color 0.15s, background 0.15s; position: relative; }
+  .card:hover { border-color: var(--border2); background: var(--surface2); }
+  .card.done { border-color: rgba(74,222,128,0.3); }
+  .card.done::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--green); border-radius: var(--radius) 0 0 var(--radius); }
+  .card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; margin-bottom: 10px; }
+  .law-num { font-family: 'Courier New', monospace; font-size: 10px; letter-spacing: 0.14em; color: var(--text3); text-transform: uppercase; padding-top: 3px; }
+  .check-btn { width: 24px; height: 24px; border-radius: 50%; border: 1px solid var(--border2); background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.15s; color: transparent; font-size: 13px; }
+  .check-btn:hover { border-color: var(--green); }
+  .check-btn.checked { background: var(--green); border-color: var(--green); color: #0e0e0f; }
+  .law-title { font-size: 14px; font-weight: 400; color: var(--text); line-height: 1.4; margin-bottom: 8px; font-family: Georgia, serif; }
+  .law-tag { display: inline-block; font-family: 'Courier New', monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 8px; border-radius: 100px; margin-bottom: 10px; }
+  .tag-strategy { background: rgba(201,169,110,0.12); color: var(--accent); border: 0.5px solid rgba(201,169,110,0.25); }
+  .tag-people { background: rgba(74,222,128,0.08); color: #4ade80; border: 0.5px solid rgba(74,222,128,0.2); }
+  .tag-reputation { background: rgba(139,92,246,0.1); color: #a78bfa; border: 0.5px solid rgba(139,92,246,0.2); }
+  .tag-timing { background: rgba(56,189,248,0.08); color: #7dd3fc; border: 0.5px solid rgba(56,189,248,0.18); }
+  .tag-mind { background: rgba(249,115,22,0.08); color: #fdba74; border: 0.5px solid rgba(249,115,22,0.18); }
+  .summary { font-family: -apple-system, sans-serif; font-size: 12px; color: var(--text2); line-height: 1.6; }
+  .expand-btn { font-family: 'Courier New', monospace; font-size: 10px; letter-spacing: 0.08em; color: var(--accent); background: none; border: none; cursor: pointer; padding: 0; margin-top: 10px; display: block; text-transform: uppercase; }
+  .expand-btn:hover { text-decoration: underline; }
+  .detail { display: none; margin-top: 14px; border-top: 0.5px solid var(--border); padding-top: 14px; }
+  .detail.open { display: block; }
+  .detail-section { margin-bottom: 12px; }
+  .detail-label { font-family: 'Courier New', monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text3); margin-bottom: 6px; }
+  .detail-text { font-family: -apple-system, sans-serif; font-size: 12px; color: var(--text2); line-height: 1.65; }
+  .action-box { background: var(--accent-dim2); border: 0.5px solid rgba(201,169,110,0.2); border-radius: var(--radius-sm); padding: 10px 12px; font-family: -apple-system, sans-serif; font-size: 12px; color: var(--text); line-height: 1.65; }
+  .empty { grid-column: 1/-1; text-align: center; padding: 4rem; color: var(--text3); font-family: -apple-system, sans-serif; font-size: 14px; }
+  .site-footer { border-top: 0.5px solid var(--border); max-width: 1100px; margin: 0 auto; padding: 1.5rem 2rem; font-family: 'Courier New', monospace; font-size: 10px; letter-spacing: 0.1em; color: var(--text3); text-transform: uppercase; }
+  @media (max-width: 600px) {
+    .site-header, .progress-section, .controls, .grid { padding-left: 1rem; padding-right: 1rem; }
+    .grid { grid-template-columns: 1fr; }
+    .reset-btn { margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="eyebrow">Personal curriculum</div>
+  <h1>The 48 Laws<br>of <em>Power</em></h1>
+  <p>A structured study guide based on Robert Greene's work. One law at a time — read, reflect, and act.</p>
+</header>
+<section class="progress-section">
+  <div class="progress-row">
+    <span class="progress-count" id="prog-count">0 / 48 laws completed</span>
+    <span class="progress-pct" id="prog-pct">0%</span>
+  </div>
+  <div class="progress-track"><div class="progress-fill" id="prog-fill" style="width:0%"></div></div>
+</section>
+<div class="controls">
+  <span class="filter-label">Filter</span>
+  <button class="filter-btn active" data-filter="all">All 48</button>
+  <button class="filter-btn" data-filter="strategy">Strategy</button>
+  <button class="filter-btn" data-filter="people">People</button>
+  <button class="filter-btn" data-filter="reputation">Reputation</button>
+  <button class="filter-btn" data-filter="timing">Timing</button>
+  <button class="filter-btn" data-filter="mind">Mindset</button>
+  <button class="filter-btn" data-filter="done">Completed</button>
+  <button class="reset-btn" id="reset-btn">Reset progress</button>
+</div>
+<main class="grid" id="grid"></main>
+<footer class="site-footer">Based on Robert Greene's The 48 Laws of Power &nbsp;·&nbsp; Progress saved to your browser</footer>
+<script>
+const laws=[{n:1,title:"Never outshine the master",tag:"people",summary:"Make those above you feel comfortably superior. Downplaying your talents keeps you safe and builds trust with those in power.",scenario:"Before a C-suite presentation, let your VP frame the opening narrative. Add your insight without overshadowing their authority — they'll champion you more readily.",action:"This week, find one moment to visibly attribute credit to your manager or a senior stakeholder in a meeting or email."},{n:2,title:"Never put too much trust in friends, use enemies",tag:"people",summary:"Friends can betray you out of envy; former adversaries have everything to prove. Relationships built on self-interest are often more reliable.",scenario:"A rival colleague who once competed with you for a project may now be your most motivated ally if you bring them into your current initiative with clear stakes.",action:"Identify one professional relationship you've written off. Consider how reengaging them with a shared goal could benefit both parties."},{n:3,title:"Conceal your intentions",tag:"strategy",summary:"Keep people off-balance by never revealing what you're truly after. Misdirection prevents others from preparing a counter-move.",scenario:"When negotiating scope or budget, don't reveal your full priorities upfront. Float adjacent topics first to understand the room before showing your hand.",action:"In your next negotiation or planning conversation, hold back your primary ask until you've gathered enough information from the other side."},{n:4,title:"Always say less than necessary",tag:"mind",summary:"Silence projects power. Over-explaining dilutes your message and signals insecurity. Vagueness can be more commanding than detail.",scenario:"After delivering a recommendation in a leadership meeting, stop talking. Let the silence work. Rushing to fill quiet moments weakens your position.",action:"In three conversations this week, consciously pause after making your point — don't elaborate unless directly asked."},{n:5,title:"Guard your reputation with your life",tag:"reputation",summary:"Reputation is the invisible foundation of your influence. A strong one lets you operate with authority; a damaged one invites attacks from all sides.",scenario:"If a project fails, proactively control the narrative — own what went wrong, highlight what you learned, and protect your brand before others define it for you.",action:"Write down how you want to be professionally known in one sentence. Audit your last month's actions: do they reflect that?"},{n:6,title:"Court attention at all cost",tag:"reputation",summary:"Invisibility is worse than infamy. Those who stand out command resources, opportunities, and influence that the overlooked never receive.",scenario:"Volunteer to present at the all-hands, lead the working group, or champion a new initiative. Visibility in high-stakes settings accelerates career momentum.",action:"Identify one upcoming high-visibility opportunity you've been avoiding and commit to stepping into it."},{n:7,title:"Get others to do the work, take the credit",tag:"strategy",summary:"Use others' skills and effort to extend your reach. The strategist who orchestrates wins; the executor who labors is forgotten.",scenario:"As a delivery manager, your value isn't in doing — it's in orchestrating. Structure your team's work so results flow upward through you.",action:"Delegate one task this week that you'd normally handle yourself. Focus your energy on synthesis and presentation of the outcome."},{n:8,title:"Make others come to you",tag:"strategy",summary:"Whoever initiates cedes control. Lure others toward you by creating demand, urgency, or exclusivity — then you hold the advantage.",scenario:"Instead of chasing client feedback, structure a compelling update that makes stakeholders eager to schedule time with you.",action:"Flip one outbound request this week into an inbound one by reframing it as an opportunity for the other party to engage with you."},{n:9,title:"Win through actions, not argument",tag:"strategy",summary:"Argument plants seeds of resentment even when you win. Demonstrating your point through results is far more persuasive and lasting.",scenario:"Instead of debating a process change in a meeting, run a small pilot. Let the outcome speak. Results bypass politics.",action:"Identify one ongoing disagreement you can settle with a proof-of-concept or demonstrated result rather than further discussion."},{n:10,title:"Avoid the unhappy and unlucky",tag:"people",summary:"Negativity and misfortune are contagious. Chronic complainers drain energy and can pull your reputation into their orbit.",scenario:"Distance yourself professionally from colleagues who are perpetually disengaged, always in conflict with leadership, or known for bringing chaos to projects.",action:"Audit your five most frequent work interactions. Do they energize or drain you? Consciously invest more time in the energizing ones."},{n:11,title:"Keep people dependent on you",tag:"people",summary:"The more others rely on you for expertise, relationships, or results, the more secure and influential your position becomes.",scenario:"Be the person who uniquely understands a critical system, process, or stakeholder relationship. Indispensability is the ultimate job security.",action:"Identify one area where you can deepen expertise or expand relationships so that your absence would create a noticeable gap."},{n:12,title:"Use selective honesty to disarm",tag:"strategy",summary:"A well-timed show of transparency or generosity lowers people's defenses — making subsequent influence far easier.",scenario:"Open a difficult stakeholder conversation by acknowledging a real limitation in your team's approach. The candor builds trust and makes them more receptive.",action:"In your next challenging conversation, lead with one genuine acknowledgment before moving into your main message."},{n:13,title:"Appeal to self-interest, not mercy",tag:"people",summary:"People act when they see personal gain. Framing your request around their benefit is infinitely more effective than invoking loyalty or past favors.",scenario:"When asking an executive for resources, don't cite effort or need. Tie your ask directly to their KPIs, visibility, or strategic goals.",action:"Rewrite one upcoming request or proposal so the first paragraph speaks exclusively to what the other person gains."},{n:14,title:"Pose as a friend, work as a spy",tag:"strategy",summary:"Casual conversation is your best intelligence source. Ask indirect questions, listen carefully, and you'll learn what people will never reveal directly.",scenario:"In project kickoffs and stakeholder check-ins, ask open-ended questions about priorities and frustrations. The answers reveal hidden agendas and decision criteria.",action:"In your next stakeholder meeting, ask one indirect question designed to uncover their unstated priority or concern."},{n:15,title:"Crush your enemy totally",tag:"strategy",summary:"A half-defeated opponent recovers and seeks revenge. When you must act against someone, leave no room for retaliation.",scenario:"If a toxic dynamic with a colleague is affecting your team, don't manage around it — escalate, document, and resolve it fully rather than letting it smolder.",action:"Identify one unresolved professional conflict you've been tolerating. Decide: address it fully or disengage completely."},{n:16,title:"Use absence to increase respect",tag:"reputation",summary:"Overexposure breeds contempt. Strategic scarcity makes you more valuable, more discussed, and more desired.",scenario:"Skip a few recurring meetings that don't require your presence. Let your input be delivered through delegates. Your return will carry more weight.",action:"Identify two recurring touchpoints you attend out of habit, not necessity. Remove yourself from one this month."},{n:17,title:"Keep others in suspended uncertainty",tag:"mind",summary:"Predictability gives others a sense of control over you. Deliberate unpredictability keeps them off-balance and focused on your next move.",scenario:"Don't always respond to emails within minutes or follow the same pattern in negotiations. Varying your tempo keeps counterparts less certain.",action:"This week, break one predictable routine in a professional interaction — vary your response time, stance, or communication style."},{n:18,title:"Do not isolate yourself",tag:"people",summary:"Isolation cuts you off from information and makes you an easy target. Circulating widely is how you stay informed and protected.",scenario:"Engage across departments, attend cross-functional meetings, and maintain relationships outside your immediate team. Your network is your early warning system.",action:"Reach out to one colleague outside your direct team this week with no agenda — just a genuine check-in."},{n:19,title:"Know who you're dealing with",tag:"people",summary:"Not everyone responds to the same tactics. Misjudge someone's temperament or ambition and your strategy can backfire catastrophically.",scenario:"Before deploying a political or persuasive move, profile the person first. Are they driven by ego, security, recognition, or principle? Tailor accordingly.",action:"Before your next important meeting, write a one-paragraph profile of the key person: what do they fear, want, and value?"},{n:20,title:"Do not commit to anyone",tag:"strategy",summary:"Independence is power. The moment you fully align with one faction, you lose leverage with all others.",scenario:"In company politics, avoid being seen as exclusively allied with one executive or team. Being the neutral connector gives you more access and influence.",action:"Reflect on whether you're perceived as a partisan player. Identify one relationship outside your primary alliance worth cultivating."},{n:21,title:"Seem dumber than your mark",tag:"strategy",summary:"People lower their guard around those they consider less capable. Appearing to know less invites them to reveal more.",scenario:"In a negotiation or information-gathering context, feign unfamiliarity with something you understand well. The other party's explanation often reveals their assumptions.",action:"Try this once this week: ask a naive question in a conversation where you already know the answer — observe what additional context you receive."},{n:22,title:"Use surrender to gain power",tag:"mind",summary:"When outmatched, a strategic retreat buys time, preserves energy, and lets the opponent overextend. Tactical surrender is not defeat.",scenario:"If a stakeholder is pushing back hard on a proposal, concede the surface-level point gracefully. Regroup and return with a stronger framing when the moment is better.",action:"Identify one current battle where you're spending disproportionate energy. Consider whether a tactical step back would improve your position long-term."},{n:23,title:"Concentrate your forces",tag:"strategy",summary:"Diluted effort produces diluted results. Focus your time, reputation, and energy on fewer, higher-leverage targets.",scenario:"Instead of leading six workstreams, own three with excellence. Depth of impact is more career-defining than breadth of involvement.",action:"List your current commitments. Choose one to deprioritize or exit so you can go deeper on what matters most."},{n:24,title:"Play the perfect courtier",tag:"people",summary:"Mastering the art of professional relationships — knowing when to flatter, yield, assert, and retreat — is a core power skill.",scenario:"In every stakeholder interaction, model graciousness and tact. The person who is never threatening, always polished, and consistently useful rises without creating enemies.",action:"Identify one person in leadership whose respect you haven't fully earned. Develop a simple plan to build that relationship with genuine investment."},{n:25,title:"Re-create yourself",tag:"mind",summary:"Your professional identity is not fixed. Consciously craft and evolve the image you project — don't let others define your narrative.",scenario:"Rebranding from project manager to strategic delivery leader isn't just semantics — it reshapes how others perceive your ceiling and your value.",action:"Rewrite your professional bio or LinkedIn headline to reflect who you're becoming, not just who you've been."},{n:26,title:"Keep your hands clean",tag:"strategy",summary:"Maintain a reputation for civility and competence by routing messy decisions through others. Distance yourself from mistakes without abandoning accountability.",scenario:"When a project requires a difficult call — cutting scope, removing a team member — have the structured process make the decision, not you personally.",action:"Identify one upcoming difficult decision you can route through a framework, committee, or process rather than making unilaterally."},{n:27,title:"Create a cultlike following",tag:"reputation",summary:"People want to believe in something larger than themselves. Those who provide a compelling vision and a sense of belonging command fierce loyalty.",scenario:"Build a team culture with a strong identity — a shared mission, language, and rituals. People fight harder for a tribe than a task.",action:"Articulate the core why behind your team's work in one compelling sentence. Share it explicitly in your next team interaction."},{n:28,title:"Enter with boldness",tag:"mind",summary:"Timidity invites doubt and signals weakness. Bold action — even if imperfect — commands respect and sets the tone.",scenario:"In a new engagement or leadership role, make a visible, confident move in the first two weeks. Early decisiveness shapes perception for months.",action:"Identify one place where hesitation has held you back professionally. Take one concrete step in that direction this week."},{n:29,title:"Plan all the way to the end",tag:"strategy",summary:"The most dangerous moment in any initiative is the endgame. Thinking backward from success prevents you from being blindsided.",scenario:"Before launching a project, map the political and operational conditions needed for the final approval. Work backward from that moment to today.",action:"For your most important current project, write down what done looks like — including who needs to approve, celebrate, or validate it."},{n:30,title:"Make accomplishments seem effortless",tag:"reputation",summary:"Showing how hard you work diminishes the effect. Mastery appears natural. The concealment of effort is itself a form of craft.",scenario:"In client-facing or executive settings, present outcomes as a matter of course — not as heroics. Over-dramatizing effort breeds doubt about your capacity.",action:"Remove one instance of we worked really hard on this from your vocabulary. Replace it with confident, matter-of-fact delivery."},{n:31,title:"Control the options",tag:"strategy",summary:"The most effective influence is one where others believe they're choosing freely. Stack the options so any choice they make serves your purpose.",scenario:"When recommending a vendor or approach, present three options — one clearly weak, one passable, and one that's your actual preference. The choice becomes obvious.",action:"In your next recommendation, deliberately structure the choices rather than presenting an open menu. Frame options so your preferred path is the natural one."},{n:32,title:"Play to people's fantasies",tag:"people",summary:"Truth is often unwelcome. Those who weave a compelling vision of what could be are far more persuasive than those who only deal in hard realities.",scenario:"When pitching a transformation initiative, lead with the aspiration — the world as it could be — before getting into execution details and trade-offs.",action:"Reframe one dry deliverable or project update into a narrative arc: where we were, where we are, where we're headed."},{n:33,title:"Discover each person's thumbscrew",tag:"people",summary:"Everyone has a core motivator — ambition, fear, insecurity, desire for recognition. Finding it gives you a lever you can use at the right moment.",scenario:"Pay attention to what colleagues talk about with the most energy. The topic they return to unprompted is usually what drives — or threatens — them.",action:"For three people you work with regularly, write down their likely primary motivator. Check how aligned your interactions are with that understanding."},{n:34,title:"Act like a king to be treated like one",tag:"mind",summary:"Self-possession and quiet confidence set the tone for how others treat you. Those who carry themselves with dignity are afforded dignity.",scenario:"In high-stakes settings — interviews, negotiations, board updates — occupy space deliberately. Speak at a measured pace. Don't apologize for your presence.",action:"Before your next presentation or important meeting, set an intention: posture, pace, and tone that projects authority, not anxiety."},{n:35,title:"Master the art of timing",tag:"timing",summary:"Knowing when to act is as important as knowing what to do. The same move can succeed or fail based on timing alone.",scenario:"Proposing a major initiative right after a project failure will meet resistance. Wait for a win — then tie your proposal to the momentum.",action:"Review one initiative you've been pushing. Is now the right time, or should you wait? Set a specific trigger for when you'll move."},{n:36,title:"Disdain what you cannot have",tag:"mind",summary:"Obsessing over what's out of reach gives it power over you. Treating it with indifference projects strength and can sometimes attract it.",scenario:"If you didn't get the promotion or client, don't linger publicly. Pivot visibly toward the next opportunity. Desperation is less attractive than momentum.",action:"Identify one professional disappointment you're still carrying. Consciously redirect that energy toward a forward-facing goal this week."},{n:37,title:"Create compelling spectacles",tag:"reputation",summary:"Symbolic moments and memorable visuals stick longer than detailed reports. Presentation is strategy.",scenario:"Don't just send a project update — orchestrate a demonstration. Live demos, visual dashboards, and milestone ceremonies create lasting impressions.",action:"Turn your next status update into an experience: a visual, a demo, a milestone celebration — something people remember."},{n:38,title:"Think freely, behave conventionally",tag:"mind",summary:"Flaunting unconventional views makes enemies. Share your real thinking selectively, with those who can appreciate it — present a conventional face to the rest.",scenario:"You may see the org's strategy as flawed, but openly challenging it creates resistance. Operate within norms while quietly building the case for change.",action:"Identify one belief you hold that runs counter to your organization's norms. Map out who you can share it with safely and who you shouldn't."},{n:39,title:"Stir waters to catch fish",tag:"strategy",summary:"Provoking an opponent into emotional reaction while remaining calm yourself gives you a decisive advantage. Anger clouds judgment.",scenario:"If a colleague is being territorial or political, stay composed. Their frustration escalates the situation while your calm projects authority.",action:"In your next tense interaction, practice responding slowly — take a breath, lower your energy, and watch how the dynamic shifts."},{n:40,title:"Despise the free lunch",tag:"mind",summary:"Anything given for free carries hidden costs — obligation, dependency, or a catch. Paying your way preserves your independence and credibility.",scenario:"Accepting favors from stakeholders without a clear value exchange creates subtle obligations that can compromise your independence later.",action:"Identify one professional favor you've received. Ensure you've created equivalent value in return — or plan how to."},{n:41,title:"Avoid stepping into a great person's shoes",tag:"mind",summary:"Succeeding a legend means being perpetually compared. Forge your own path rather than trying to improve on someone else's legacy.",scenario:"If you've inherited a team or role from a beloved predecessor, resist improving their methods. Build something distinctly yours instead.",action:"If you're operating in someone's shadow, identify one thing you can introduce that is entirely your own initiative and reflects your style."},{n:42,title:"Strike the shepherd",tag:"people",summary:"Group dysfunction usually traces to one individual. Neutralizing that person — not managing around them — resolves the problem at the source.",scenario:"If one strong personality is poisoning team dynamics, address them directly and decisively. Allowing them to operate unchecked spreads their influence.",action:"Identify any person currently destabilizing your team. Determine whether you have the standing to act and what the right intervention looks like."},{n:43,title:"Work on hearts and minds",tag:"people",summary:"Coercion breeds resentment. Winning people's genuine belief in your direction is exponentially more durable than forcing compliance.",scenario:"When driving adoption of a new process or tool, invest in the emotional case first. People support what they helped shape and what speaks to their values.",action:"For one initiative requiring buy-in, identify the emotional objection underneath the rational one — and address that directly."},{n:44,title:"Disarm with the mirror effect",tag:"strategy",summary:"Mirroring someone's behavior — reflecting their tactics back at them — disorients without appearing aggressive.",scenario:"If a competitor copies your approach, adopt theirs. If someone speaks over you in a meeting, match their directness. Mirroring equalizes power dynamics.",action:"In one upcoming interaction, consciously match the communication style, energy, or structure of the person you're engaging with."},{n:45,title:"Preach change, reform gradually",tag:"timing",summary:"People fear disruption even when they endorse change in the abstract. Radical moves invite revolt. Incremental shifts wearing familiar clothing succeed.",scenario:"When implementing a new governance model or tooling change, frame it as an evolution — not a replacement. Wrap the new in the language of the old.",action:"For one change you're implementing, reframe the messaging to emphasize continuity and improvement rather than departure from the current state."},{n:46,title:"Never appear too perfect",tag:"reputation",summary:"Flawlessness breeds envy and suspicion. Strategically revealing small imperfections makes you more human, more trusted, and less threatening.",scenario:"In a leadership presentation, briefly acknowledge a challenge or early misstep before pivoting to the solution. It disarms critics and builds authentic credibility.",action:"In your next significant communication, include one moment of candor — a constraint or open question — that humanizes you without undermining you."},{n:47,title:"Know when to stop",tag:"timing",summary:"Victory is the most dangerous moment. Overconfidence after success leads to overreach. Stop when you've achieved your aim.",scenario:"After landing the account, closing the deal, or shipping the product — celebrate briefly, then reset. Don't let momentum become recklessness.",action:"After your next win, write down explicitly what the next goal is and what enough looks like. Prevent drift into overreach."},{n:48,title:"Assume formlessness",tag:"strategy",summary:"Rigid plans and fixed identities are easy targets. Adaptability is your greatest defense — stay fluid, be ready to change shape.",scenario:"The best delivery managers don't over-engineer processes. They build systems that flex when circumstances change, rather than breaking under pressure.",action:"Identify one rigid process, plan, or stance you hold that may benefit from more flexibility. Consider what adapting it would look like."}];
+
+const tagLabels={strategy:"Strategy",people:"People",reputation:"Reputation",timing:"Timing",mind:"Mindset"};
+let completed=JSON.parse(localStorage.getItem('laws48_v2')||'[]');
+let activeFilter='all';
+
+function saveProgress(){localStorage.setItem('laws48_v2',JSON.stringify(completed));}
+
+function updateProgress(){
+  const n=completed.length,pct=Math.round(n/48*100);
+  document.getElementById('prog-count').textContent=n+' / 48 laws completed';
+  document.getElementById('prog-pct').textContent=pct+'%';
+  document.getElementById('prog-fill').style.width=pct+'%';
+}
+
+function toggle(n,e){
+  e.stopPropagation();
+  const i=completed.indexOf(n);
+  if(i>-1)completed.splice(i,1);else completed.push(n);
+  saveProgress();updateProgress();render();
+}
+
+function expand(n,e){
+  e.stopPropagation();
+  const d=document.getElementById('detail-'+n),b=document.getElementById('expand-'+n);
+  const open=d.classList.toggle('open');
+  b.textContent=open?'↑ Show less':'↓ Read more';
+}
+
+function render(){
+  const grid=document.getElementById('grid');
+  let list=laws;
+  if(activeFilter==='done')list=laws.filter(l=>completed.includes(l.n));
+  else if(activeFilter!=='all')list=laws.filter(l=>l.tag===activeFilter);
+  if(!list.length){grid.innerHTML='<div class="empty">No laws in this view yet.</div>';return;}
+  grid.innerHTML=list.map(l=>{
+    const done=completed.includes(l.n);
+    return`<article class="card${done?' done':''}" onclick="expand(${l.n},event)">
+      <div class="card-header">
+        <span class="law-num">Law ${String(l.n).padStart(2,'0')}</span>
+        <button class="check-btn${done?' checked':''}" onclick="toggle(${l.n},event)" aria-label="${done?'Mark incomplete':'Mark complete'}">${done?'&#10003;':''}</button>
+      </div>
+      <div class="law-title">${l.title.charAt(0).toUpperCase()+l.title.slice(1)}</div>
+      <span class="law-tag tag-${l.tag}">${tagLabels[l.tag]}</span>
+      <div class="summary">${l.summary}</div>
+      <button class="expand-btn" id="expand-${l.n}" onclick="expand(${l.n},event)">&#8595; Read more</button>
+      <div class="detail" id="detail-${l.n}">
+        <div class="detail-section">
+          <div class="detail-label">Career scenario</div>
+          <div class="detail-text">${l.scenario}</div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-label">Action step</div>
+          <div class="action-box">${l.action}</div>
+        </div>
+      </div>
+    </article>`;
+  }).join('');
+}
+
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    activeFilter=btn.dataset.filter;
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    render();
+  });
+});
+
+document.getElementById('reset-btn').addEventListener('click',()=>{
+  if(confirm('Reset all progress? This cannot be undone.')){
+    completed=[];saveProgress();updateProgress();render();
+  }
+});
+
+updateProgress();render();
+</script>
+</body>
+</html>
